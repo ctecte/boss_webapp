@@ -5,7 +5,12 @@ No idea why school doesnt just do this, so ill do it myself for easier reference
 # If you just want to use it, visit here
 https://orangepi.tail4dee5c.ts.net
 
-This is hosted on my personal orange pi zero 3 with tailscale funnel and gunicorn. The Docker compose yml is there for anyone who wants to run this
+This is hosted on my personal orange pi zero 3 with tailscale funnel and gunicorn. 
+The Docker compose yml is there for anyone who wants to run this.
+```
+docker compose up -d
+```
+Thats the only line of code you need to run this lol. Access through port 5000. http://localhost:5000
 
 Note that this db only contains data from 2021-22 T2 to 2024-25 T2. Will update once the next round of bidding excel sheet is released
 
@@ -55,5 +60,6 @@ First time using flask to build a website. First time building a website fullsto
 Followed this tutorial until part 3 https://www.youtube.com/watch?v=QnDWIZuWYW0&t=366s
 
 # I have no idea if this breaks any SMU guidelines or data policies btw
+
 
 
