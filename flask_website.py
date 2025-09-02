@@ -88,38 +88,40 @@ def index():
         """
         df = pd.read_sql_query(query, conn, params=(course_code, term, bidding_window, day, time, professor))
         conn.close()
+        if df.empty:
+            result_table = "<p><strong>No results found.</strong></p>"
+        else:
+            df['start_time'] = df['start_time'].str.slice(0, 5)
+            df['end_time'] = df['end_time'].str.slice(0, 5)
 
-        df['start_time'] = df['start_time'].str.slice(0, 5)
-        df['end_time'] = df['end_time'].str.slice(0, 5)
+            # table is too long, dropping unimportant (?) columns
+            drop_columns = ['venue','school/department', 'd.i.c.e'] # drop session also? Regular Academic Session
+            # df = df[[c for c in df.columns if c not in drop_columns]]
+            df = df.drop(columns=drop_columns)
 
-        # table is too long, dropping unimportant (?) columns
-        drop_columns = ['venue','school/department', 'd.i.c.e'] # drop session also? Regular Academic Session
-        # df = df[[c for c in df.columns if c not in drop_columns]]
-        df = df.drop(columns=drop_columns)
+            # shortening the names of some columns
+            df = df.rename(columns={
+                'term': 'Term',
+                'session': 'Session',
+                'bidding_window': 'Window',
+                'course_code': 'Code',
+                'description': 'Desc',
+                'section': 'Sect',
+                'vacancy': 'Vacancy',
+                'opening_vacancy': 'Opening',
+                'before_process_vacancy': 'Before',
+                'after_process_vacancy': 'After',
+                'enrolled_students': 'Enrolled',
+                'median_bid': 'Median',
+                'min_bid': 'Min',
+                'instructor': 'Prof',
+                'meet': 'Meet',
+                'day': 'Day',
+                'start_time': 'Start',
+                'end_time': 'End'
+            })
 
-        # shortening the names of some columns
-        df = df.rename(columns={
-            'term': 'Term',
-            'session': 'Session',
-            'bidding_window': 'Window',
-            'course_code': 'Code',
-            'description': 'Desc',
-            'section': 'Sect',
-            'vacancy': 'Vacancy',
-            'opening_vacancy': 'Opening',
-            'before_process_vacancy': 'Before',
-            'after_process_vacancy': 'After',
-            'enrolled_students': 'Enrolled',
-            'median_bid': 'Median',
-            'min_bid': 'Min',
-            'instructor': 'Prof',
-            'meet': 'Meet',
-            'day': 'Day',
-            'start_time': 'Start',
-            'end_time': 'End'
-        })
-
-        result_table = df.to_html(classes="table table-bordered", index=False)
+            result_table = df.to_html(classes="table table-bordered", index=False)
 
     return render_template('home.html', title='Result', form=form, result=result_table)
 
