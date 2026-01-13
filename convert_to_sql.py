@@ -18,7 +18,7 @@ excel_files = [
 
 for excel in excel_files:
     print(excel)
-    df = pd.read_excel(f'raw_data/{excel}')
+    df = pd.read_excel(f'merged_data_filtered/{excel}')
     print("read excel")
 
     df.columns = [col.strip().lower().replace(" ", "_") for col in df.columns]
