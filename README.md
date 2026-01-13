@@ -45,12 +45,13 @@ Curl it into a html output, and parse it with beautifulsoup. Take note the html 
 The script parses the website and then saves the data into a csv, which can be manipulated with pandas and exported to excel. You can then merge this csv-> excel with the available boss data excel.
 
 # Merging the data with pandas 
-Nothing to explain, just use Jupyter notebook to see what you're doing
-Make sure you adjust the column names according to your data. 
+Once you have the timing sheet, follow the naming convention for the file
 
-Ensure you are merging only the same term, then left join on section = section and course_code = course_code
-Could inner join too but just left join 
+20XX-20XX_T1_timing.xlsx
 
+After that, replace the headers/column names of xx_timing.xlsx with the column names found in template.xlsx (in raw_data folder) before using the Merge_timing_and_bid_ipynb to merge the dfs. 
+
+Please ensure that the boss bid xlsx and the timing.xlsx are in the same folder as the notebook
 # Data storage: SQLite3 .db file
 Its lightweight and works, aint spinning up a MySQL server docker container for this.
 Pass the excel data into the SQLite database
