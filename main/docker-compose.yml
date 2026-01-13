@@ -1,0 +1,11 @@
+services:
+  web:
+    build: .
+    volumes:
+      - ./flask_website.py:/app/flask_website.py
+      - ./boss_data.db:/app/boss_data.db
+    ports:
+      - "5000:5000"
+    command: "gunicorn -w 4 -b 0.0.0.0:5000 flask_website:app"
+    restart: unless-stopped
+
