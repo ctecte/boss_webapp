@@ -1,18 +1,18 @@
-# SMU BOSS bidding Historical bids combined with Timings, and filter by prof functionality
+# SMU BOSS bidding Historical bids combined with Timings, with enhanced filter options 
 
-No idea why school doesnt just do this, so ill do it myself for easier reference
+<img width="2524" height="1258" alt="image" src="https://github.com/user-attachments/assets/5e585394-389e-4205-af74-267815bb6483" />
+
+No idea why school doesnt offer this, so ill do it myself for easier reference.
 
 # If you just want to use it, visit here
 https://orangepi.tail4dee5c.ts.net
-
-This is hosted on my personal orange pi zero 3 with tailscale funnel and gunicorn. 
-The Docker compose yml is there for anyone who wants to run this.
+The Docker compose yml is there for anyone who wants to run this locally, or update the boss_data.db when I am not a student anymore.
 ```
 docker compose up -d
 ```
-Thats the only line of code you need to run this lol. Access through port 5000. http://localhost:5000
+To run, download only the main folder, then run the above command in the directory with the docker yaml inside. By default it is on http://localhost:5000 .
 
-Note that this db only contains data from 2021-22 T2 to 2024-25 T2. Will update once the next round of bidding excel sheet is released
+This db contains data from 2021-22 T2 to 2025-26 T1, and may be updated by me manually when the smu sharepoint releases the excel sheet. 
 
 # Explaning the data collection 
 Boss data is collected from BOSS website naturally. There is a download link that leads to a shared file drive allowing active students to download an xlsx of the previous term bids. 
@@ -20,9 +20,9 @@ Boss data is collected from BOSS website naturally. There is a download link tha
 For data that maps section (G1) to the day (FRI 12:00), this is available here on SMU's own website
 https://publiceservices.smu.edu.sg/psc/ps/EMPLOYEE/SA/c/SIS_CR.SIS_CS_SS_CLS_SCHD.GBL
 
-You can download the results of current sem and future sems into an excel.
+You can download the results of current sem and future sems into an excel. If I am not mistaken, it is downloaded as a .xls. It should be converted with an online converted to .xlsx.
 
-However, the page does not allow you to query past semesters, as it is not selectable in the dropdown. The curl command is how i got around the lack of dropdown option, by directly passing in parameters to query the backend database.
+The page does not allow you to query past semesters, as it is not selectable in the dropdown. The curl command is how i got around the lack of dropdown option, by directly passing in parameters to query the backend database.
 
 # Curl the SMU website
 In case you require past data, refer to the curl smu website txt file
@@ -53,14 +53,10 @@ After that, replace the headers/column names of xx_timing.xlsx with the column n
 
 Please ensure that the boss bid xlsx and the timing.xlsx are in the same folder as the notebook
 # Data storage: SQLite3 .db file
-Its lightweight and works, aint spinning up a MySQL server docker container for this.
-Pass the excel data into the SQLite database
+The db file can be rebuilt with the excel sheets using the helper script convert_to_sql.py
 
-# Functional website
-First time using flask to build a website. First time building a website fullstop.
-Followed this tutorial until part 3 https://www.youtube.com/watch?v=QnDWIZuWYW0&t=366s
 
-# I have no idea if this breaks any SMU guidelines or data policies btw
+
 
 
 
