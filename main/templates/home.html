@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="input-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <div class="form-group">
+                    {{form.course_code.label(class="form-control-label")}}
+                    {{ form.course_code(class_="form-control select2") }}
+                </div>
+                <div class="form-group">
+                    {{form.terms.label(class="form-control-label")}}
+                    {{ form.terms(class_="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.bidding_windows.label(class="form-control-label") }}
+                    {{form.bidding_windows(class_="form-control")}}
+                </div>
+                <div class="form-group">
+                    {{ form.day.label(class="form-control-label") }}
+                    {{form.day(class_="form-control")}}
+                </div>
+                <div class="form-group">
+                    {{ form.start_times.label(class="form-control-label") }}
+                    {{form.start_times(class_="form-control")}}
+                </div>
+                <div class="form-group">
+                    {{ form.professors.label(class="form-control-label") }}
+                    {{form.professors(class_="form-control")}}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{form.submit}}
+            </div>
+        </form> 
+    </div>
+
+    <style>
+    .sticky-table thead th {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 2;
+    }
+    </style>
+
+    <div class="table-responsive sticky-table">
+    {{ result|safe }}
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
+{%endblock content%}

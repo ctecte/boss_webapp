@@ -10,8 +10,6 @@ app.config['SECRET_KEY'] = 'abcde'
 @app.route("/", methods=['GET', 'POST'])
 def index():
     form = InputForm()
-    # Set selectable options
-
     conn = sqlite3.connect("boss_data.db")
     cursor = conn.cursor()
 
